@@ -1,12 +1,13 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
+const server=import.meta.env.VITE_BACKEND
 const AddStudent = ({ sem_id,fetch ,setFetch }) => {
   const [form, setForm] = useState({ name: "", age: "", phone: "" });
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        const { data } = await axios.post("/api/student", { ...form, sem_id });
+        const { data } = await axios.post(`${server}/api/student`, { ...form, sem_id });
         console.log(data);
         setForm({name:'',age:'',phone:''});
         setFetch(!fetch)

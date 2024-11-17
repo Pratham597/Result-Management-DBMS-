@@ -6,11 +6,12 @@ import New from '../components/Exam/New.jsx'
 import { useParams } from "react-router-dom";
 import Info from "../components/Exam/Info.jsx";
 import Footer from "../components/Utils/Footer.jsx";
+const server=import.meta.env.VITE_BACKEND;
 const Exam = () => {
   const { course_id } = useParams();
   const [exam, setExam] = useState([]);
   const fetchExam = async () => {
-    const { data } = await axios.get(`/api/course/${course_id}/exam`);
+    const { data } = await axios.get(`${server}/api/course/${course_id}/exam`);
     setExam(data);
   };
 
@@ -18,7 +19,7 @@ const Exam = () => {
   const handleAddExam= async (e,form)=>{
     e.preventDefault();
     try {
-      const {data}=await axios.post('/api/exam',{...form,course_id})
+      const {data}=await axios.post(`${server}/api/exam`,{...form,course_id})
       fetchExam();
     } catch (error) {
       console.log(error.message)

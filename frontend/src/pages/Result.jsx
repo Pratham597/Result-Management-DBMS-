@@ -7,6 +7,7 @@ import MidSem from "../components/Result/MidSem.jsx";
 import EndSem from "../components/Result/EndSem.jsx";
 import New from "../components/Result/New.jsx";
 import Footer from "../components/Utils/Footer.jsx";
+const server=import.meta.env.VITE_BACKEND;
 const Result = () => {
   const { student_id } = useParams();
   const [result, setResult] = useState({});
@@ -32,7 +33,7 @@ const Result = () => {
   }
   const fetchResult = async () => {
     try {
-      const { data } = await axios.get(`/api/student/${student_id}/result`);
+      const { data } = await axios.get(`${server}/api/student/${student_id}/result`);
       let groupResult = GroupedResults(data);
       setResult(groupResult);
     } catch (error) {
@@ -43,7 +44,7 @@ const Result = () => {
   const handleAddResult = async (e, form, setForm) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("/api/result", { ...form, student_id });
+      const { data } = await axios.post(`${server}/api/result`, { ...form, student_id });
       fetchResult();
       setForm({ exam_id: "", marks: "", total_marks: "" });
     } catch (error) {

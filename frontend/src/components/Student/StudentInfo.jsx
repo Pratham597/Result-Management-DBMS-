@@ -1,9 +1,10 @@
 import axios from "axios";
+const server=import.meta.env.VITE_BACKEND
 const StudentCard = ({ student }) => {
   const handleUpgrade = async () => {
     try {
       const {sem_id,student_id}=student;
-      await axios.put("/api/student",{student_id,sem_id});
+      await axios.put(`${server}/api/student`,{student_id,sem_id});
     } catch (error) {
       console.log(error.message);
       alert("Cant Upgrade! Please pass all exams");

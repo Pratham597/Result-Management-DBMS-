@@ -4,11 +4,12 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Card from "../components/Card.jsx";
 import Footer from "../components/Utils/Footer.jsx";
+const server=import.meta.env.VITE_BACKEND;
 const LandingPage = () => {
   const imageSrc=['/department_images/dept1.jpg','/department_images/dept2.jpg','/department_images/dept3.jpg']
   const [department, setDepartment] = useState([]);
   const fetchDepartment = async () => {
-    const { data } = await axios.get("/api/department");
+    const { data } = await axios.get(`${server}/api/department`);
     setDepartment(data)
   };
   useEffect(() => {

@@ -6,12 +6,13 @@ import StudentInfo from "../components/Student/StudentInfo.jsx";
 import { useParams } from "react-router-dom";
 import AddStudent from "../components/Student/AddStudent.jsx";
 import Footer from "../components/Utils/Footer.jsx";
+const server=import.meta.env.VITE_BACKEND;
 const Semester = () => {
   const { sem_id } = useParams();
   const [student, setStudent] = useState([]);
   const [fetch, setFetch] = useState(false);
   const fetchStudent = async () => {
-    const { data } = await axios.get(`/api/semester/${sem_id}/students`);
+    const { data } = await axios.get(`${server}/api/semester/${sem_id}/students`);
     setStudent(data);
   };
   useEffect(() => {

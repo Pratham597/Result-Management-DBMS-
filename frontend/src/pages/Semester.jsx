@@ -5,6 +5,7 @@ import axios from "axios";
 import Card from "../components/Card.jsx";
 import { useParams } from "react-router-dom";
 import Footer from "../components/Utils/Footer.jsx";
+const server=import.meta.env.VITE_BACKEND;
 const Semester = () => {
   const { dept_id } = useParams();
   const imageSrc = [
@@ -14,7 +15,7 @@ const Semester = () => {
   ];
   const [semester, setSemester] = useState([]);
   const fetchSemester = async () => {
-    const { data } = await axios.get(`/api/${dept_id}/semester`);
+    const { data } = await axios.get(`${server}/api/${dept_id}/semester`);
     setSemester(data);
   };
   useEffect(() => {

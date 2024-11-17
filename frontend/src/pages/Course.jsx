@@ -6,12 +6,13 @@ import { useParams } from "react-router-dom";
 import Info from "../components/Course/Info.jsx";
 import New from "../components/Course/New.jsx";
 import Footer from "../components/Utils/Footer.jsx";
+const server=import.meta.env.VITE_BACKEND;
 const LandingPage = () => {
   const { sem_id } = useParams();
   const [course, setCourse] = useState([]);
 
   const fetchCourse = async () => {
-    const { data } = await axios.get(`/api/semester/${sem_id}/course`);
+    const { data } = await axios.get(`${server}/api/semester/${sem_id}/course`);
     setCourse(data);
   };
   useEffect(() => {
@@ -20,7 +21,7 @@ const LandingPage = () => {
   const handleAddCourse = async (e, form, setForm) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("/api/course", {
+      const { data } = await axios.post(`${server}/api/course`, {
         ...form,
         sem_id: sem_id,
       });

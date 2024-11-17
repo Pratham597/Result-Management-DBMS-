@@ -3,6 +3,15 @@ const app = express();
 import "dotenv/config";
 import connectDB from "./connectDB.js";
 import { v4 as uuidv4 } from "uuid";
+import cors from 'cors';
+
+const allowedOrigins = ['https://https://result-management-dbms.onrender.com']; // Replace with your frontend's URL
+
+app.use(cors({
+  origin: allowedOrigins, 
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], 
+  credentials: true, 
+}));
 
 // Middlewares for body parsing.
 app.use(express.json());
