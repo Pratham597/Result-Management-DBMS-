@@ -32,7 +32,6 @@ app.post("/department", async (req, res, next) => {
     const [result, fields] = await connection.query(query, values);
     return res.json({ message: "Inserted Successfully!" });
   } catch (error) {
-    console.log(error.message);
     next(error);
   }
 });
@@ -62,7 +61,6 @@ app.post("/semester", async (req, res, next) => {
     await connection.query(query, values);
     return res.json({ message: "Semester created successfully!" });
   } catch (error) {
-    console.log(error.message);
     next(error);
   }
 });
@@ -75,7 +73,6 @@ app.get("/api/:dept_id/semester", async (req, res, next) => {
     const [result] = await connection.query(query, values);
     return res.json(result);
   } catch (error) {
-    console.log(error.message);
     next(error);
   }
 });
@@ -94,7 +91,6 @@ app.post("/teacher", async (req, res, next) => {
     await connection.query(query, values);
     return res.json({ message: "Teacher inserted succeessfully!" });
   } catch (error) {
-    console.log(error.message);
     next(error);
   }
 });
@@ -115,7 +111,6 @@ app.post("/api/course", async (req, res, next) => {
       return res.json({ message: "Course added successfully!" });
     } else return res.status(403).json({ message: "Invalid data!" });
   } catch (error) {
-    console.log(error.message);
     next(error);
   }
 });
@@ -130,7 +125,6 @@ app.get("/api/semester/:sem_id/course", async (req, res, next) => {
     const [result] = await connection.query(query, values);
     return res.json(result);
   } catch (error) {
-    console.log(error.message);
     next(error);
   }
 });
@@ -147,7 +141,6 @@ app.post("/api/student", async (req, res, next) => {
     await connection.query(query, values);
     return res.json({ message: "Student inserted successfully!" });
   } catch (error) {
-    console.log(error.message);
     next(error);
   }
 });
@@ -161,7 +154,6 @@ app.get("/api/semester/:sem_id/students", async (req, res, next) => {
     const [result] = await connection.query(query, values);
     return res.json(result);
   } catch (error) {
-    console.log(error.message);
     next(error);
   }
 });
@@ -175,7 +167,6 @@ app.get("/api/course/:course_id/exam", async (req, res, next) => {
     const [result] = await connection.query(query, values);
     return res.json(result);
   } catch (error) {
-    console.log(error.message);
     next(error);
   }
 });
@@ -191,7 +182,6 @@ app.post("/api/exam", async (req, res, next) => {
     await connection.query(query, values);
     return res.json({ message: "Exam taken successfully!" });
   } catch (error) {
-    console.log(error.message);
     next(error);
   }
 });
@@ -205,7 +195,6 @@ app.post("/api/result", async (req, res, next) => {
     await connection.query(query, values);
     return res.json({ message: "Result added successfully!" });
   } catch (error) {
-    console.log(error.message);
     next(error);
   }
 });
@@ -220,7 +209,6 @@ app.get("/api/student/:student_id/result", async (req, res, next) => {
 
     return res.json(result);
   } catch (error) {
-    console.log(error.message);
     next(error);
   }
 });
@@ -243,10 +231,13 @@ app.put("/api/student", async (req, res, next) => {
       return res.json({ message: "Upgraded Successfully!" });
     } else return res.status(500).json({ message: "Department Not found" });
   } catch (error) {
-    console.log(error.message);
     next(error);
   }
 });
+
+app.all('*',(req,res,next)=>{
+  return res.status(400).json({message:'Not Found! Please back to home!'});
+})
 
 app.use((err, req, res) => {
   return res.status(500).json({ message: "Internal Server Error!" });
