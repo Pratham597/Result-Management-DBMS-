@@ -6,7 +6,13 @@ import Card from "../components/Card.jsx";
 import { useParams } from "react-router-dom";
 import Footer from "../components/Utils/Footer.jsx";
 const server=import.meta.env.VITE_BACKEND;
+import { useNavigate } from "react-router-dom";
 const Semester = () => {
+  const navigate = useNavigate();
+
+    const handleNavigate = (s) => {
+        navigate(s);
+    };
   const { dept_id } = useParams();
   const imageSrc = [
     "/department_images/dept1.jpg",
@@ -37,11 +43,11 @@ const Semester = () => {
               src={imageSrc[idx % 3]}
               actionText="View Subjects"
               onAction={() =>
-                (window.location.href = `/semester/${sem.sem_id}/course`)
+                handleNavigate(`/semester/${sem.sem_id}/course`)
               }
               actionSecondText="Students Enrolled"
               onSecondAction={() =>
-                (window.location.href = `/semester/${sem.sem_id}/students`)
+                handleNavigate(`/semester/${sem.sem_id}/students`)
               }
             />
           );

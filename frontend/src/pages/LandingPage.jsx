@@ -4,8 +4,10 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Card from "../components/Card.jsx";
 import Footer from "../components/Utils/Footer.jsx";
+import { useNavigate } from "react-router-dom";
 const server=import.meta.env.VITE_BACKEND;
 const LandingPage = () => {
+  const navigate=useNavigate();
   const imageSrc=['/department_images/dept1.jpg','/department_images/dept2.jpg','/department_images/dept3.jpg']
   const [department, setDepartment] = useState([]);
   const fetchDepartment = async () => {
@@ -15,6 +17,10 @@ const LandingPage = () => {
   useEffect(() => {
     fetchDepartment();
   }, []);
+
+  const handleNavigate=()=>{
+    navigate(`/department/${dept.dept_id}/semester`)
+  }
 
   return (
     <div className=" min-h-[100vh] bg-green-200 flex flex-col">
@@ -28,7 +34,7 @@ const LandingPage = () => {
                 title={dept.dept_name}
                 src={imageSrc[idx%3]}
                 actionText="View More"
-                onAction={() => (window.location.href = `/department/${dept.dept_id}/semester`)}
+                onAction={handleNavigate}
               />
         
           );

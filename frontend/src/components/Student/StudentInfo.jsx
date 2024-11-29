@@ -1,6 +1,12 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const server=import.meta.env.VITE_BACKEND
 const StudentCard = ({ student }) => {
+  const navigate = useNavigate();
+
+  const handleNavigate = () => {
+      navigate(`/student/${student.student_id}/result`);
+  };
   const handleUpgrade = async () => {
     try {
       const {sem_id,student_id}=student;
@@ -27,9 +33,7 @@ const StudentCard = ({ student }) => {
 
       {/* Upgrade Button */}
       <button
-        onClick={() =>
-          (window.location.href = `/student/${student.student_id}/result`)
-        }
+        onClick={handleNavigate}
         className="w-full bg-green-400 text-white py-2 px-4 rounded-lg hover:bg-green-500 focus:ring-2 focus:ring-green-500 focus:outline-none"
       >
         View Result
