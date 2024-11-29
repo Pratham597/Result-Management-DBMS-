@@ -18,7 +18,7 @@ const LandingPage = () => {
     fetchDepartment();
   }, []);
 
-  const handleNavigate=()=>{
+  const handleNavigate=(dept)=>{
     navigate(`/department/${dept.dept_id}/semester`)
   }
 
@@ -34,7 +34,7 @@ const LandingPage = () => {
                 title={dept.dept_name}
                 src={imageSrc[idx%3]}
                 actionText="View More"
-                onAction={handleNavigate}
+                onAction={()=>{handleNavigate(dept)}}
               />
         
           );
